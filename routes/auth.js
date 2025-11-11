@@ -9,7 +9,10 @@ router.post("/register", async (req, res) => {
   try {
     const { firstname, lastname, username, password, role } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    let query = username.toString();
+
+    const existingUser = await User.find({ query });
+
     if (existingUser) {
       return res.status(400).json({
         result: false,
