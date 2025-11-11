@@ -54,7 +54,9 @@ router.post("/login", async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ username });
+    let query = username.toString();
+
+    const user = await User.find({ query });
     if (!user) {
       return res.status(400).json({
         result: false,
